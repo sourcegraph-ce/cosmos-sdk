@@ -32,7 +32,7 @@ func FreeTCPAddr() (addr, port string, err error) {
 	defer closer()
 
 	portI := l.Addr().(*net.TCPAddr).Port
-	port = fmt.Sprintf("%d", portI)
+	port = strconv.Itoa(portI)
 	addr = fmt.Sprintf("tcp://0.0.0.0:%s", port)
 	return
 }

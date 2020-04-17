@@ -961,7 +961,7 @@ func TestApplyAndReturnValidatorSetUpdatesBondTransition(t *testing.T) {
 
 	// initialize some validators into the state
 	for i, power := range powers {
-		moniker := fmt.Sprintf("%d", i)
+		moniker := strconv.Itoa(i)
 		valPubKey := PKs[i+1]
 		valAddr := sdk.ValAddress(valPubKey.Address().Bytes())
 

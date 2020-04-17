@@ -51,7 +51,7 @@ func handleMsgSubmitProposal(ctx sdk.Context, keeper Keeper, msg MsgSubmitPropos
 	submitEvent := sdk.NewEvent(types.EventTypeSubmitProposal, sdk.NewAttribute(types.AttributeKeyProposalType, msg.Content.ProposalType()))
 	if votingStarted {
 		submitEvent = submitEvent.AppendAttributes(
-			sdk.NewAttribute(types.AttributeKeyVotingPeriodStart, fmt.Sprintf("%d", proposal.ProposalID)),
+			sdk.NewAttribute(types.AttributeKeyVotingPeriodStart, strconv.Itoa(proposal.ProposalID)),
 		)
 	}
 	ctx.EventManager().EmitEvent(submitEvent)
@@ -80,7 +80,7 @@ func handleMsgDeposit(ctx sdk.Context, keeper Keeper, msg MsgDeposit) sdk.Result
 		ctx.EventManager().EmitEvent(
 			sdk.NewEvent(
 				types.EventTypeProposalDeposit,
-				sdk.NewAttribute(types.AttributeKeyVotingPeriodStart, fmt.Sprintf("%d", msg.ProposalID)),
+				sdk.NewAttribute(types.AttributeKeyVotingPeriodStart, strconv.Itoa(msg.ProposalID)),
 			),
 		)
 	}
