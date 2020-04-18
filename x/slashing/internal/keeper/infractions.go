@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/tendermint/tendermint/crypto"
@@ -83,7 +84,7 @@ func (k Keeper) HandleDoubleSign(ctx sdk.Context, addr crypto.Address, infractio
 		sdk.NewEvent(
 			types.EventTypeSlash,
 			sdk.NewAttribute(types.AttributeKeyAddress, consAddr.String()),
-			sdk.NewAttribute(types.AttributeKeyPower, fmt.Sprintf("%d", power)),
+			sdk.NewAttribute(types.AttributeKeyPower, strconv.Itoa(power)),
 			sdk.NewAttribute(types.AttributeKeyReason, types.AttributeValueDoubleSign),
 		),
 	)
@@ -156,8 +157,8 @@ func (k Keeper) HandleValidatorSignature(ctx sdk.Context, addr crypto.Address, p
 			sdk.NewEvent(
 				types.EventTypeLiveness,
 				sdk.NewAttribute(types.AttributeKeyAddress, consAddr.String()),
-				sdk.NewAttribute(types.AttributeKeyMissedBlocks, fmt.Sprintf("%d", signInfo.MissedBlocksCounter)),
-				sdk.NewAttribute(types.AttributeKeyHeight, fmt.Sprintf("%d", height)),
+				sdk.NewAttribute(types.AttributeKeyMissedBlocks, strconv.Itoa(signInfo.MissedBlocksCounter)),
+				sdk.NewAttribute(types.AttributeKeyHeight, strconv.Itoa(height)),
 			),
 		)
 
@@ -188,7 +189,7 @@ func (k Keeper) HandleValidatorSignature(ctx sdk.Context, addr crypto.Address, p
 				sdk.NewEvent(
 					types.EventTypeSlash,
 					sdk.NewAttribute(types.AttributeKeyAddress, consAddr.String()),
-					sdk.NewAttribute(types.AttributeKeyPower, fmt.Sprintf("%d", power)),
+					sdk.NewAttribute(types.AttributeKeyPower, strconv.Itoa(power)),
 					sdk.NewAttribute(types.AttributeKeyReason, types.AttributeValueMissingSignature),
 					sdk.NewAttribute(types.AttributeKeyJailed, consAddr.String()),
 				),

@@ -5,6 +5,7 @@ package simulation
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	"github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -21,7 +22,7 @@ func ParamChanges(r *rand.Rand) []simulation.ParamChange {
 	return []simulation.ParamChange{
 		simulation.NewSimParamChange(types.ModuleName, keyMaxValidators, "",
 			func(r *rand.Rand) string {
-				return fmt.Sprintf("%d", GenMaxValidators(r))
+				return strconv.Itoa(GenMaxValidators(r))
 			},
 		),
 		simulation.NewSimParamChange(types.ModuleName, keyUnbondingTime, "",
